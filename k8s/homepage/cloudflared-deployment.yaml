@@ -1,0 +1,55 @@
+# Cloudflare Tunnel — external HTTPS ingress for tagomori_homepage
+# Contract: ns=homepage / Service homepage-web:80
+# CF Zero Trust Public Hostname should target:
+#   http://homepage-web.homepage.svc.cluster.local:80
+#
+# Token MUST come from a cluster Secret (never inline, never ConfigMap).
+# Create Secret out-of-band (see docs/ci-secrets.md). Do not commit real Secret YAML.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudflare-tunnel
+  namespace: homepage
+  labels:
+    app: cloudflare-tunnel
+    app.kubernetes.io/component: ingress
+    app.kubernetes.io/part-of: tagomori-homepage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloudflare-tunnel
+  template:
+    metadata:
+      labels:
+        app: cloudflare-tunnel
+        app.kubernetes.io/component: ingress
+    spec:
+      containers:
+        - name: cloudflared
+          image: cloudflare/cloudflared:latest
+          args:
+            - tunnel
+            - --no-autoupdate
+            - run
+            - --token
+            - $(TUNNEL_TOKEN)
+          env:
+            - name: TUNNEL_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: cloudflare-tunnel-secret
+                  key: tunnel-token
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          livenessProbe:
+            exec:
+              command: ["cloudflared", "tunnel", "info"]
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            failureThreshold: 3

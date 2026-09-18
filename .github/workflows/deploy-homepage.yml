@@ -1,0 +1,114 @@
+# Homepage static site → GHCR → k3s (GitHub-hosted only)
+# 要 Secret: KUBE_CONFIG（kubeconfig 全文。値をログ出力しない）
+# 権限: contents:read / packages:write（GITHUB_TOKEN で GHCR push）
+# Dockerfile・Next アプリ本体はリポジトリルート想定（他兵担当）。本ファイルは CI のみ。
+
+name: deploy-homepage
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - "app/**"
+      - "public/**"
+      - "package.json"
+      - "package-lock.json"
+      - "next.config.*"
+      - "Dockerfile"
+      - "k8s/homepage/**"
+      - ".github/workflows/deploy-homepage.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: deploy-homepage
+  cancel-in-progress: true
+
+env:
+  IMAGE: ghcr.io/tagomori0211/tagomori-homepage
+  WORKING_DIRECTORY: .
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          # package-lock 追加後に cache: npm を有効化してよい
+
+      - name: Install dependencies
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: Build Next static export
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        run: npm run build
+        # 成果物: out/（next.config の output: "export" はアプリ側）
+
+      - name: Set image tags
+        id: meta
+        run: |
+          echo "sha=${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
+          echo "short_sha=${GITHUB_SHA::12}" >> "$GITHUB_OUTPUT"
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: ${{ env.WORKING_DIRECTORY }}
+          file: ${{ env.WORKING_DIRECTORY }}/Dockerfile
+          push: true
+          tags: |
+            ${{ env.IMAGE }}:${{ steps.meta.outputs.sha }}
+            ${{ env.IMAGE }}:${{ steps.meta.outputs.short_sha }}
+            ${{ env.IMAGE }}:latest
+          # 要: ルート Dockerfile（歩兵担当）。秘密を Dockerfile / build-args に入れない
+
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v4
+        with:
+          version: "v1.29.0"
+
+      # 要 Secret: KUBE_CONFIG（値を echo / cat しない）
+      - name: Configure kubeconfig
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+        run: |
+          if [ -z "${KUBE_CONFIG}" ]; then
+            echo "Missing required secret: KUBE_CONFIG" >&2
+            exit 1
+          fi
+          mkdir -p "$HOME/.kube"
+          printf %sn "$KUBE_CONFIG" > "$HOME/.kube/config"
+          chmod 600 "$HOME/.kube/config"
+
+      - name: Apply homepage manifests
+        run: kubectl apply -f k8s/homepage/
+
+      - name: Roll out built image
+        run: |
+          kubectl -n homepage set image deployment/homepage-web \
+            homepage-web="${IMAGE}:${GITHUB_SHA}"
+          kubectl -n homepage rollout status deployment/homepage-web --timeout=180s

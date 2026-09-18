@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: homepage-web
+  namespace: homepage
+  labels:
+    app: homepage-web
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: tagomori-homepage
+spec:
+  selector:
+    app: homepage-web
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+      name: http

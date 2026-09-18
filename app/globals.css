@@ -1,0 +1,295 @@
+:root {
+  --bg: #0f1419;
+  --bg-elevated: #1a2332;
+  --bg-card: #1e2a3a;
+  --border: #2d3a4d;
+  --text: #e7ecf3;
+  --text-muted: #9aabbd;
+  --accent: #5b9fd4;
+  --accent-soft: rgba(91, 159, 212, 0.15);
+  --success: #6bcb8a;
+  --warn: #e6b84d;
+  --radius: 10px;
+  --max-w: 720px;
+  --font: system-ui, -apple-system, "Segoe UI", "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Noto Sans JP", Meiryo, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+main {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+.site-header {
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-elevated);
+}
+
+.site-header-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+.nav {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+}
+
+.nav a {
+  color: var(--text-muted);
+}
+
+.nav a:hover {
+  color: var(--accent);
+}
+
+.hero {
+  margin: 2.5rem 0 2rem;
+}
+
+.hero h1 {
+  font-size: clamp(1.5rem, 4vw, 1.9rem);
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 0 0 0.75rem;
+}
+
+.hero .tagline {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.section {
+  margin: 2.5rem 0;
+}
+
+.section h2 {
+  font-size: 1.25rem;
+  margin: 0 0 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.section h3 {
+  font-size: 1.05rem;
+  margin: 1.5rem 0 0.6rem;
+  color: var(--accent);
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.35rem;
+  margin: 1rem 0;
+}
+
+.card p:first-child {
+  margin-top: 0;
+}
+
+.card p:last-child {
+  margin-bottom: 0;
+}
+
+.story-flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+
+.story-flow .step {
+  background: var(--accent-soft);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  color: var(--text);
+}
+
+.story-flow .arrow {
+  color: var(--text-muted);
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.metric {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.9rem 1rem;
+  text-align: center;
+}
+
+.metric .value {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--success);
+  display: block;
+}
+
+.metric .label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.diagram {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.diagram svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.diagram-caption {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.75rem;
+  text-align: center;
+}
+
+.chain-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.chain-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.chain-list .node {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.9rem;
+}
+
+.chain-list .sep {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.note {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  border-left: 3px solid var(--accent);
+  padding-left: 0.85rem;
+  margin: 1rem 0;
+}
+
+code,
+.mono {
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas,
+    monospace;
+  font-size: 0.88em;
+}
+
+pre {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+ol.steps {
+  padding-left: 1.25rem;
+}
+
+ol.steps li {
+  margin: 0.4rem 0;
+}
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  margin-top: 3rem;
+  padding: 1.5rem 1.25rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.site-footer a {
+  color: var(--text-muted);
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  vertical-align: middle;
+  margin-left: 0.35rem;
+}
