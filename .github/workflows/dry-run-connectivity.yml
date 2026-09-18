@@ -1,0 +1,53 @@
+# Connectivity dry-run only. No apply / no image push / no deploy.
+# Required secrets (names only): TS_MESH_KEY, KUBE_CONFIG
+# Do not echo secret values.
+
+name: dry-run-connectivity
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dry-run-connectivity
+  cancel-in-progress: true
+
+jobs:
+  mesh-and-kubectl-get:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Connect Tailscale (ephemeral)
+        uses: tailscale/github-action@v3
+        with:
+          authkey: ${{ secrets.TS_MESH_KEY }}
+          # Ephemeral key should be issued as ephemeral in Tailscale admin.
+          # No hostname advertising of secrets.
+
+      - name: Configure kubeconfig
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+        run: |
+          if [ -z "${KUBE_CONFIG}" ]; then
+            echo "Missing required secret: KUBE_CONFIG" >&2
+            exit 1
+          fi
+          mkdir -p "$HOME/.kube"
+          printf "%s\n" "$KUBE_CONFIG" > "$HOME/.kube/config"
+          chmod 600 "$HOME/.kube/config"
+
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v4
+        with:
+          version: "v1.29.0"
+
+      - name: kubectl get (read-only)
+        run: |
+          set -euo pipefail
+          kubectl get ns
+          kubectl -n homepage get deploy,svc
+          kubectl -n homepage get pods -o wide || true
