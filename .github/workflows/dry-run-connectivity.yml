@@ -25,8 +25,9 @@ jobs:
         uses: tailscale/github-action@v3
         with:
           authkey: ${{ secrets.TS_MESH_KEY }}
+          # Wait until peer is reachable over the mesh (MagicDNS; no raw IP).
+          targets: k3s-worker-1.tail8da087.ts.net
           # Ephemeral key should be issued as ephemeral in Tailscale admin.
-          # No hostname advertising of secrets.
 
       - name: Configure kubeconfig
         env:
