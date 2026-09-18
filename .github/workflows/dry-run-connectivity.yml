@@ -46,9 +46,9 @@ jobs:
         with:
           version: "v1.29.0"
 
-      - name: kubectl get (read-only)
+      - name: kubectl get (read-only, namespace-scoped)
         run: |
           set -euo pipefail
-          kubectl get ns
+          # cluster-scope list 禁止（例: kubectl get ns）
           kubectl -n homepage get deploy,svc
           kubectl -n homepage get pods -o wide || true
