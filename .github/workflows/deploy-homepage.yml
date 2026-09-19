@@ -10,6 +10,8 @@ on:
     branches: [main, master]
     paths:
       - "app/**"
+      - "components/**"
+      - "data/**"
       - "public/**"
       - "package.json"
       - "package-lock.json"

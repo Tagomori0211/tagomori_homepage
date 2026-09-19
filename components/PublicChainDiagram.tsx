@@ -1,70 +1,82 @@
-/** 公開サイト配信鎖の簡易 SVG 図 */
+/** 公開サイト配信鎖の SVG 図（色は CSS 変数 / currentColor を使いテーマに追従） */
+const NODES = [
+  { label: "訪問者", sub: "HTTPS", x: 0 },
+  { label: "Cloudflare", sub: "Edge / Tunnel", x: 1, hot: true },
+  { label: "cloudflared", sub: "Pod (homepage ns)", x: 2 },
+  { label: "homepage-web", sub: "nginx:alpine", x: 3 },
+  { label: "k3s node", sub: "Ryzen 5700G", x: 4 },
+];
+
+const W = 760;
+const H = 180;
+const BOX_W = 128;
+const BOX_H = 56;
+const GAP = (W - BOX_W * NODES.length) / (NODES.length - 1);
+
 export default function PublicChainDiagram() {
   return (
-    <div className="diagram" role="img" aria-label="公開サイト鎖の構成図">
+    <figure className="diagram">
       <svg
-        viewBox="0 0 640 200"
+        viewBox={`0 0 ${W} ${H}`}
         xmlns="http://www.w3.org/2000/svg"
-        width="640"
-        height="200"
+        role="img"
+        aria-label="公開サイト鎖: 訪問者 → Cloudflare Tunnel → cloudflared → homepage-web → k3s ノード"
       >
         <defs>
-          <marker
-            id="arrow"
-            markerWidth="8"
-            markerHeight="8"
-            refX="6"
-            refY="3"
-            orient="auto"
-          >
-            <path d="M0,0 L6,3 L0,6 Z" fill="#5b9fd4" />
+          <marker id="pc-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="var(--accent)" />
           </marker>
+          <linearGradient id="pc-line" x1="0" x2="1">
+            <stop offset="0" stopColor="var(--accent)" stopOpacity="0.35" />
+            <stop offset="1" stopColor="var(--accent)" />
+          </linearGradient>
         </defs>
-        {/* boxes */}
-        <rect x="8" y="70" width="100" height="48" rx="8" fill="#1e2a3a" stroke="#2d3a4d" />
-        <text x="58" y="98" textAnchor="middle" fill="#e7ecf3" fontSize="13" fontFamily="system-ui,sans-serif">
-          訪問者
-        </text>
 
-        <rect x="140" y="70" width="120" height="48" rx="8" fill="#1e2a3a" stroke="#5b9fd4" />
-        <text x="200" y="90" textAnchor="middle" fill="#e7ecf3" fontSize="12" fontFamily="system-ui,sans-serif">
-          Cloudflare
-        </text>
-        <text x="200" y="106" textAnchor="middle" fill="#9aabbd" fontSize="11" fontFamily="system-ui,sans-serif">
-          Tunnel
-        </text>
+        {/* 境界ラベル */}
+        <g className="diagram-zone">
+          <rect x={BOX_W + GAP / 2} y="18" width={BOX_W * 1 + GAP} height={H - 36} rx="10" />
+          <text x={BOX_W + GAP / 2 + 10} y="36">public edge</text>
+          <rect x={BOX_W * 2 + GAP * 2 - GAP / 2} y="18" width={BOX_W * 3 + GAP * 2 + GAP / 2 - 4} height={H - 36} rx="10" />
+          <text x={BOX_W * 2 + GAP * 2 - GAP / 2 + 10} y="36">homelab (k3s, private)</text>
+        </g>
 
-        <rect x="292" y="70" width="100" height="48" rx="8" fill="#1e2a3a" stroke="#2d3a4d" />
-        <text x="342" y="98" textAnchor="middle" fill="#e7ecf3" fontSize="13" fontFamily="system-ui,sans-serif">
-          cloudflared
-        </text>
-
-        <rect x="424" y="70" width="80" height="48" rx="8" fill="#1e2a3a" stroke="#2d3a4d" />
-        <text x="464" y="98" textAnchor="middle" fill="#e7ecf3" fontSize="13" fontFamily="system-ui,sans-serif">
-          Pod
-        </text>
-
-        <rect x="536" y="70" width="96" height="48" rx="8" fill="#1e2a3a" stroke="#2d3a4d" />
-        <text x="584" y="98" textAnchor="middle" fill="#e7ecf3" fontSize="13" fontFamily="system-ui,sans-serif">
-          ノード
-        </text>
-
-        {/* arrows */}
-        <line x1="108" y1="94" x2="136" y2="94" stroke="#5b9fd4" strokeWidth="2" markerEnd="url(#arrow)" />
-        <line x1="260" y1="94" x2="288" y2="94" stroke="#5b9fd4" strokeWidth="2" markerEnd="url(#arrow)" />
-        <line x1="392" y1="94" x2="420" y2="94" stroke="#5b9fd4" strokeWidth="2" markerEnd="url(#arrow)" />
-        <line x1="504" y1="94" x2="532" y2="94" stroke="#5b9fd4" strokeWidth="2" markerEnd="url(#arrow)" />
-
-        <text x="320" y="40" textAnchor="middle" fill="#9aabbd" fontSize="12" fontFamily="system-ui,sans-serif">
-          公開サイト鎖（論理・配信パス）
-        </text>
-        <text x="320" y="170" textAnchor="middle" fill="#9aabbd" fontSize="11" fontFamily="system-ui,sans-serif">
-          HTTPS → Tunnel → クラスタ内 Ingress/Service → 静的コンテンツ
-        </text>
+        {NODES.map((n, i) => {
+          const x = i * (BOX_W + GAP);
+          const y = (H - BOX_H) / 2;
+          return (
+            <g key={n.label}>
+              {i < NODES.length - 1 && (
+                <line
+                  x1={x + BOX_W}
+                  y1={y + BOX_H / 2}
+                  x2={x + BOX_W + GAP - 2}
+                  y2={y + BOX_H / 2}
+                  stroke="url(#pc-line)"
+                  strokeWidth="2"
+                  markerEnd="url(#pc-arrow)"
+                />
+              )}
+              <rect
+                x={x}
+                y={y}
+                width={BOX_W}
+                height={BOX_H}
+                rx="8"
+                className={n.hot ? "diagram-box hot" : "diagram-box"}
+              />
+              <text x={x + BOX_W / 2} y={y + 24} textAnchor="middle" className="diagram-label">
+                {n.label}
+              </text>
+              <text x={x + BOX_W / 2} y={y + 42} textAnchor="middle" className="diagram-sub">
+                {n.sub}
+              </text>
+            </g>
+          );
+        })}
       </svg>
-      <p className="diagram-caption">
-        訪問者からノードまでの公開サイト配信鎖（簡略図）
-      </p>
-    </div>
+      <figcaption className="diagram-caption">
+        インバウンドポートは開けない。cloudflared がアウトバウンドで Tunnel を張り、Service 経由で nginx の静的ファイルを返す。
+      </figcaption>
+    </figure>
   );
 }

@@ -9,7 +9,8 @@ Tagomori の**公開ホームページ**本体です。
 - **二層の鎖**
   - 公開サイト鎖: 訪問者 → Cloudflare Tunnel → cloudflared → Pod → ノード
   - 物理鎖: 要約のみ。正本は [tagomori-homelab](https://github.com/Tagomori0211/tagomori-homelab) の README（TX2540M1 → Ryzen 5700G → メイン、10G デイジー、PoE 不採用など）
-- 障害・運用の短い原則、秘密を含まない再現手順、GitHub への連絡導線
+- **プロジェクト一覧**: GitHub の公開リポジトリ 8 件へのリンク（`data/repos.ts` で管理。追加・説明変更はこのファイルだけ直す）
+- 障害・運用の短い原則、秘密を含まない再現手順、GitHub / X への連絡導線
 
 ゲーム宣伝や監視ダッシュボードはこのリポの範囲外です。
 
