@@ -113,8 +113,16 @@ jobs:
           chmod 600 "$HOME/.kube/config"
 
       - name: Apply homepage manifests
-        run: kubectl apply -f k8s/homepage/
-        # ns / web Deploy / Service / cloudflared。Secret YAML は含めない（参照のみ）
+        run: |
+          # Namespace は cluster-scoped。SA に get/create が無い場合は既存 ns 前提で続行（dry-run と同系 RBAC）
+          if ! kubectl apply -f k8s/homepage/namespace.yaml; then
+            echo "namespace.yaml apply skipped (Forbidden or already managed outside SA scope)"
+          fi
+          kubectl apply \
+            -f k8s/homepage/web-deployment.yaml \
+            -f k8s/homepage/web-service.yaml \
+            -f k8s/homepage/cloudflared-deployment.yaml
+          # Secret は作成・上書きしない（マニフェストに含めない／参照のみ）
 
       - name: Roll out built image
         run: |
