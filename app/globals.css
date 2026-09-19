@@ -1027,19 +1027,235 @@ ol.steps li::marker {
 }
 
 /* ──────────────────────────────────────────────
+   About
+   ────────────────────────────────────────────── */
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.about-main p {
+  color: var(--text-2);
+  font-size: 1rem;
+  line-height: 1.85;
+}
+
+.about-main p:last-child {
+  margin-bottom: 0;
+}
+
+.about-card {
+  background: var(--bg-2);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.6rem;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 80px;
+}
+
+.profile-dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem 1rem;
+  font-size: 0.92rem;
+}
+
+.profile-dl dt {
+  color: var(--accent);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  padding-top: 0.15rem;
+  white-space: nowrap;
+}
+
+.profile-dl dd {
+  margin: 0;
+  color: var(--text);
+}
+
+/* ──────────────────────────────────────────────
+   Skills
+   ────────────────────────────────────────────── */
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.skill-category {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.2rem;
+  box-shadow: var(--shadow);
+}
+
+.skill-cat-name {
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  color: var(--accent-2);
+  letter-spacing: 0.06em;
+  margin: 0 0 0.7rem;
+  text-transform: uppercase;
+}
+
+.skill-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.skill-tag {
+  font-size: 0.78rem;
+  color: var(--text);
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 0.2rem 0.55rem;
+}
+
+.cert-block {
+  margin-top: 1.5rem;
+}
+
+.cert-list {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cert-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 1.1rem 1.5rem;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  min-width: 240px;
+}
+
+.cert-issuer {
+  font-size: 0.72rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.cert-name {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+/* ──────────────────────────────────────────────
+   Timeline
+   ────────────────────────────────────────────── */
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 78px;
+  top: 12px;
+  bottom: 12px;
+  width: 2px;
+  background: var(--line-strong);
+}
+
+.timeline-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 2rem;
+  padding: 0 0 2.5rem;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: 72px;
+  top: 8px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--bg-3);
+  border: 2px solid var(--line-strong);
+  z-index: 1;
+}
+
+.timeline-highlight .timeline-marker {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.timeline-date {
+  font-size: 0.82rem;
+  color: var(--muted);
+  text-align: right;
+  padding-top: 0.15rem;
+  line-height: 1.4;
+}
+
+.timeline-content {
+  padding-left: 0.5rem;
+}
+
+.timeline-content h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.4rem;
+}
+
+.timeline-highlight .timeline-content h3 {
+  color: var(--accent);
+}
+
+.timeline-content p {
+  color: var(--text-2);
+  font-size: 0.92rem;
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* ──────────────────────────────────────────────
    Responsive
    ────────────────────────────────────────────── */
 @media (max-width: 960px) {
   .hero-grid,
   .reproduce-grid,
-  .rack-wrap {
+  .rack-wrap,
+  .about-grid {
     grid-template-columns: 1fr;
+  }
+
+  .about-card {
+    position: static;
   }
 
   .metrics,
   .repo-grid,
   .featured-grid,
   .contact-links {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .skill-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -1061,7 +1277,8 @@ ol.steps li::marker {
   .repo-grid,
   .featured-grid,
   .principles,
-  .contact-links {
+  .contact-links,
+  .skill-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1079,5 +1296,23 @@ ol.steps li::marker {
 
   .hero h1 {
     font-size: 2.4rem;
+  }
+
+  .timeline::before {
+    left: 6px;
+  }
+
+  .timeline-item {
+    grid-template-columns: 1fr;
+    padding-left: 2rem;
+  }
+
+  .timeline-marker {
+    left: 0;
+  }
+
+  .timeline-date {
+    text-align: left;
+    font-size: 0.75rem;
   }
 }

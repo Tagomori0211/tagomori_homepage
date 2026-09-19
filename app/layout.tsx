@@ -3,25 +3,25 @@ import { GITHUB_URL, GITHUB_USER, X_HANDLE } from "@/data/repos";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Tagomori — 観測し、判断し、改善する",
+  title: "田籠 勇吉 — インフラエンジニアポートフォリオ",
   description:
-    "田籠 (Tagomori) の公開ホームページ。homelab の配信鎖と物理構成、blameless な運用の記録、GitHub で公開しているプロジェクト一覧。",
+    "田籠 勇吉 (Tagomori Yuukichi) のポートフォリオ。未経験から約2週間でプロダクション k3s 環境を構築。Terraform/Ansible/Kubernetes による IaC、Prometheus/Grafana 監視基盤、GCP ACE 認定。",
   robots: { index: true, follow: true },
   openGraph: {
-    title: "Tagomori — 観測し、判断し、改善する",
+    title: "田籠 勇吉 — インフラエンジニアポートフォリオ",
     description:
-      "homelab の配信鎖と物理構成、blameless な運用の記録、公開プロジェクト一覧。",
+      "自宅ラボでエンタープライズサーバーを運用するインフラエンジニア志望。IaC・監視・CI/CD の実践記録と公開プロジェクト。",
     type: "website",
     locale: "ja_JP",
   },
 };
 
 const NAV = [
-  { href: "#story", label: "Story" },
-  { href: "#chains", label: "Chains" },
+  { href: "#about", label: "About" },
+  { href: "#skills", label: "Skills" },
+  { href: "#timeline", label: "Timeline" },
   { href: "#projects", label: "Projects" },
-  { href: "#ops", label: "Ops" },
-  { href: "#reproduce", label: "Reproduce" },
+  { href: "#story", label: "Story" },
   { href: "#contact", label: "Contact" },
 ];
 

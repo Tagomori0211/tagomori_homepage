@@ -1,6 +1,8 @@
 import PublicChainDiagram from "@/components/PublicChainDiagram";
 import PhysicalChainSummary from "@/components/PhysicalChainSummary";
 import RepoCard from "@/components/RepoCard";
+import SkillGrid from "@/components/SkillGrid";
+import Timeline from "@/components/Timeline";
 import { GITHUB_URL, GITHUB_USER, X_HANDLE, repos } from "@/data/repos";
 
 function SectionHead({
@@ -34,7 +36,7 @@ export default function HomePage() {
         <div className="container hero-grid">
           <div className="hero-copy">
             <p className="eyebrow mono">
-              田籠 / Tagomori · インフラエンジニア志望 · Kitakyushu
+              田籠 勇吉 (Tagomori Yuukichi) · インフラエンジニア志望 · 北九州市
             </p>
             <h1 id="hero-title">
               観測し、
@@ -44,13 +46,13 @@ export default function HomePage() {
               <span className="accent">改善する。</span>
             </h1>
             <p className="tagline">
-              自宅ラボ（homelab）を運用しながら、配信鎖・物理構成・障害対応を記録しています。
-              コストを 4.5 倍に膨らませた構成を捨てて 75% 削るまでの判断と、
-              その過程で公開したプロジェクトをまとめたページです。
+              未経験から約 2 週間でプロダクション k3s 環境を構築。自宅ラボで
+              エンタープライズサーバーを運用しながら、IaC・監視・CI/CD を
+              実践的に習得し、GCP Associate Cloud Engineer 認定を取得しました。
             </p>
             <div className="hero-actions">
-              <a className="btn primary" href="#projects">
-                プロジェクトを見る
+              <a className="btn primary" href="#about">
+                プロフィールを見る
               </a>
               <a
                 className="btn ghost"
@@ -91,40 +93,115 @@ export default function HomePage() {
 
         <div className="container metrics" role="list" aria-label="主要な数字">
           <div className="metric" role="listitem">
-            <span className="metric-value">×4.5</span>
-            <span className="metric-label">一時的に膨らんだ運用コスト</span>
+            <span className="metric-value accent">~2w</span>
+            <span className="metric-label">未経験 → プロダクション k3s</span>
+          </div>
+          <div className="metric" role="listitem">
+            <span className="metric-value">GCP ACE</span>
+            <span className="metric-label">Associate Cloud Engineer 認定</span>
           </div>
           <div className="metric" role="listitem">
             <span className="metric-value accent">−75%</span>
-            <span className="metric-label">廃止・薄型化後の削減</span>
+            <span className="metric-label">インフラコスト削減実績</span>
           </div>
           <div className="metric" role="listitem">
             <span className="metric-value">10G</span>
             <span className="metric-label">スイッチレス・デイジーチェーン</span>
           </div>
-          <div className="metric" role="listitem">
-            <span className="metric-value">{repos.length}</span>
-            <span className="metric-label">GitHub 公開リポジトリ</span>
+        </div>
+      </section>
+
+      {/* ───────────── About ───────────── */}
+      <section id="about" className="section" aria-labelledby="about-heading">
+        <div className="container">
+          <SectionHead
+            no="01"
+            id="about-heading"
+            title="自己紹介"
+            lead="現場で培った観察力と、独学で得たインフラ技術。"
+          />
+          <div className="about-grid">
+            <div className="about-main">
+              <p>
+                工業高校（電子情報科）を卒業後、ゲームデバッグや物流倉庫など多様な現場を経験してきました。
+                2024 年 11 月にインフラエンジニアリングの独学を開始し、約 2 週間で
+                Terraform・Ansible・k3s を用いたプロダクション環境の構築に到達しています。
+              </p>
+              <p>
+                「自宅ラボ＝実務のシミュレーション環境」という方針のもと、
+                エンタープライズサーバー（FUJITSU PRIMERGY TX2540 M1 / Xeon 20C40T / 192GB ECC RAM）上に
+                Proxmox VE を基盤としたクラスター環境を構築・運用。
+                IaC・監視・CI/CD の一連のパイプラインを個人で設計・構築・運用しています。
+              </p>
+              <p>
+                現場で身につけた「数字を並べ、判断し、改善する」サイクルと独学で得たインフラ技術を武器に、
+                Web / 通信系のインフラエンジニア・SRE ポジションを志望しています。
+                将来的にはゲーム業界の SRE / インフラ部門で、最高のエンタメ体験を支える基盤構築に携わることを目指しています。
+              </p>
+            </div>
+            <aside className="about-card">
+              <dl className="profile-dl">
+                <dt className="mono">氏名</dt>
+                <dd>田籠 勇吉（たごもり ゆうきち）</dd>
+                <dt className="mono">拠点</dt>
+                <dd>福岡県 北九州市</dd>
+                <dt className="mono">志望</dt>
+                <dd>インフラエンジニア / SRE</dd>
+                <dt className="mono">認定</dt>
+                <dd>GCP Associate Cloud Engineer</dd>
+                <dt className="mono">学歴</dt>
+                <dd>工業高校 電子情報科 卒</dd>
+                <dt className="mono">職歴</dt>
+                <dd>ゲームデバッグ、物流倉庫</dd>
+              </dl>
+            </aside>
           </div>
         </div>
       </section>
 
-      {/* ───────────── Story ───────────── */}
-      <section id="story" className="section" aria-labelledby="story-heading">
+      {/* ───────────── Skills ───────────── */}
+      <section id="skills" className="section alt" aria-labelledby="skills-heading">
         <div className="container">
           <SectionHead
-            no="01"
+            no="02"
+            id="skills-heading"
+            title="技術スタック"
+            lead="TAK Pipeline — Terraform (IaC) → Ansible (Config) → Kubernetes (Orchestration) を基軸に、監視・CI/CD を含むモダンな DevOps 環境を個人運用。"
+          />
+          <SkillGrid />
+        </div>
+      </section>
+
+      {/* ───────────── Timeline ───────────── */}
+      <section id="timeline" className="section" aria-labelledby="timeline-heading">
+        <div className="container">
+          <SectionHead
+            no="03"
+            id="timeline-heading"
+            title="学習の軌跡"
+            lead="2024 年 11 月の学習開始から、約 2 週間でプロダクション環境構築に到達。以降も継続的に技術領域を拡張。"
+          />
+          <Timeline />
+        </div>
+      </section>
+
+      {/* ───────────── Story ───────────── */}
+      <section id="story" className="section alt" aria-labelledby="story-heading">
+        <div className="container">
+          <SectionHead
+            no="04"
             id="story-heading"
             title="旗艦ストーリー"
-            lead="あるワークロード向けに積み上げた構成が、運用コストをおよそ 4.5 倍に押し上げていた。観測データと制約を並べ直し、「維持するより廃止する」と判断した記録。"
+            lead="あるワークロード向けに積み上げた構成が、月間の電気代・回線費を含む運用コストをおよそ 4.5 倍に押し上げていた。観測データと制約を並べ直し、「維持するより廃止する」と判断した記録。"
           />
           <ol className="steps-grid">
             <li className="step-card">
               <span className="step-no mono">01 / 観測</span>
               <h3>数字を並べる</h3>
               <p>
-                コスト・電力・稼働率・実際に使われた時間を同じ表に置く。感覚ではなく、
-                「何に、いくら、どれだけ使ったか」を見える形にした。
+                月間の電気代・回線費・稼働率・実際に使われた時間を同じ表に置いた。
+                Prometheus のメトリクスと請求書を突き合わせ、感覚ではなく
+                「何に、いくら、どれだけ使ったか」を可視化した。
               </p>
             </li>
             <li className="step-card">
@@ -132,6 +209,7 @@ export default function HomePage() {
               <h3>維持より廃止</h3>
               <p>
                 単スレッド性能が要る実験負荷のために組んだ構成は、目的を果たした後は過剰だった。
+                稼働率データが裏付けた：月間で実際に使われたのは全体の 12% 未満。
                 サンクコストに引きずられず、薄い構成へ戻す判断を下した。
               </p>
             </li>
@@ -139,22 +217,23 @@ export default function HomePage() {
               <span className="step-no mono">03 / 改善</span>
               <h3>−75% と基準の文書化</h3>
               <p>
-                余剰を削り、関連コストはおよそ 75% 減。blameless な振り返りで
-                「次に同じ判断を迫られたときの基準」を残した。
+                余剰を削り、月間の関連コストはおよそ 75% 減。Blameless な振り返りで
+                「次に同じ判断を迫られたときの基準」を文書化し、再発防止策をリポジトリに残した。
               </p>
             </li>
           </ol>
           <p className="note">
-            ゲーム用途の宣伝ではなく、観測に基づくコストと複雑さの削減の話です。物理ノード選定の制約が見えたきっかけ、という位置づけに留めます。
+            この判断プロセスは、規模に関わらず同じフレームワークが適用できると考えています。
+            「観測→判断→改善」のサイクルを言語化し、チームで共有可能な基準に落とし込むことが重要です。
           </p>
         </div>
       </section>
 
       {/* ───────────── Chains ───────────── */}
-      <section id="chains" className="section alt" aria-labelledby="chains-heading">
+      <section id="chains" className="section" aria-labelledby="chains-heading">
         <div className="container">
           <SectionHead
-            no="02"
+            no="05"
             id="chains-heading"
             title="二層の鎖"
             lead="訪問者がこのページに届くまでの「公開サイト鎖」と、パケットが実際に流れる「物理鎖」。秘密やトークンは載せず、公開可能な層だけを示します。"
@@ -177,10 +256,10 @@ export default function HomePage() {
       </section>
 
       {/* ───────────── Projects ───────────── */}
-      <section id="projects" className="section" aria-labelledby="projects-heading">
+      <section id="projects" className="section alt" aria-labelledby="projects-heading">
         <div className="container">
           <SectionHead
-            no="03"
+            no="06"
             id="projects-heading"
             title="プロジェクト"
             lead="GitHub で公開しているリポジトリ。インフラ寄りのものを先頭に。"
@@ -211,10 +290,10 @@ export default function HomePage() {
       </section>
 
       {/* ───────────── Ops ───────────── */}
-      <section id="ops" className="section alt" aria-labelledby="ops-heading">
+      <section id="ops" className="section" aria-labelledby="ops-heading">
         <div className="container">
           <SectionHead
-            no="04"
+            no="07"
             id="ops-heading"
             title="障害・運用の原則"
             lead="短く、blameless に。"
@@ -250,11 +329,11 @@ export default function HomePage() {
       </section>
 
       {/* ───────────── Reproduce ───────────── */}
-      <section id="reproduce" className="section" aria-labelledby="reproduce-heading">
+      <section id="reproduce" className="section alt" aria-labelledby="reproduce-heading">
         <div className="container reproduce-grid">
           <div>
             <SectionHead
-              no="05"
+              no="08"
               id="reproduce-heading"
               title="秘密なし再現手順"
               lead="このサイトは静的エクスポート。秘密・証明書・トンネル資格情報はリポに含まれません。"
@@ -293,7 +372,7 @@ kubectl apply -f k8s/homepage/`}</pre>
       <section id="contact" className="section contact" aria-labelledby="contact-heading">
         <div className="container contact-inner">
           <SectionHead
-            no="06"
+            no="09"
             id="contact-heading"
             title="連絡"
             lead="メールアドレスは公開していません。GitHub の Issue / Discussion か X でどうぞ。"
