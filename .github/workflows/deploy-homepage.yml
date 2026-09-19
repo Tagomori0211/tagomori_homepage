@@ -1,6 +1,6 @@
 # Homepage static site → GHCR → k3s (GitHub-hosted only)
-# 要 Secret: KUBE_CONFIG（kubeconfig 全文。値をログ出力しない）
-# 権限: contents:read / packages:write（GITHUB_TOKEN で GHCR push）
+# 要 Secret（名前のみ）: KUBE_CONFIG, TS_MESH_KEY
+# 値をログ出力しない。Secret の作成・上書きはしない。
 # Dockerfile・Next アプリ本体はリポジトリルート想定（他兵担当）。本ファイルは CI のみ。
 
 name: deploy-homepage
@@ -42,7 +42,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          # package-lock 追加後に cache: npm を有効化してよい
+          cache: npm
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
         working-directory: ${{ env.WORKING_DIRECTORY }}
@@ -86,12 +87,19 @@ jobs:
             ${{ env.IMAGE }}:latest
           # 要: ルート Dockerfile（歩兵担当）。秘密を Dockerfile / build-args に入れない
 
+      - name: Connect Tailscale (ephemeral)
+        uses: tailscale/github-action@v3
+        with:
+          authkey: ${{ secrets.TS_MESH_KEY }}
+          # dry-run と同じ peer（MagicDNS。生IP禁止）
+          targets: k3s-worker-1.tail8da087.ts.net
+
       - name: Setup kubectl
         uses: azure/setup-kubectl@v4
         with:
           version: "v1.29.0"
 
-      # 要 Secret: KUBE_CONFIG（値を echo / cat しない）
+      # 要 Secret: KUBE_CONFIG（値を echo / cat しない。作成・上書きしない）
       - name: Configure kubeconfig
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
@@ -101,14 +109,20 @@ jobs:
             exit 1
           fi
           mkdir -p "$HOME/.kube"
-          printf %sn "$KUBE_CONFIG" > "$HOME/.kube/config"
+          printf "%s\n" "$KUBE_CONFIG" > "$HOME/.kube/config"
           chmod 600 "$HOME/.kube/config"
 
       - name: Apply homepage manifests
         run: kubectl apply -f k8s/homepage/
+        # ns / web Deploy / Service / cloudflared。Secret YAML は含めない（参照のみ）
 
       - name: Roll out built image
         run: |
           kubectl -n homepage set image deployment/homepage-web \
             homepage-web="${IMAGE}:${GITHUB_SHA}"
           kubectl -n homepage rollout status deployment/homepage-web --timeout=180s
+
+      - name: Status summary (namespace-scoped)
+        if: always()
+        run: |
+          kubectl -n homepage get deploy,svc,pods -o wide || true
