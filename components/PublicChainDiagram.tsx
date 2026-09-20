@@ -20,7 +20,7 @@ export default function PublicChainDiagram() {
         viewBox={`0 0 ${W} ${H}`}
         xmlns="http://www.w3.org/2000/svg"
         role="img"
-        aria-label="公開サイト鎖: 訪問者 → Cloudflare Tunnel → cloudflared → homepage-web → k3s ノード"
+        aria-label="公開サイト: 訪問者 → Cloudflare Tunnel → cloudflared → homepage-web → k3s ノード"
       >
         <defs>
           <marker id="pc-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
@@ -75,7 +75,7 @@ export default function PublicChainDiagram() {
         })}
       </svg>
       <figcaption className="diagram-caption">
-        インバウンドポートは開けない。cloudflared がアウトバウンドで Tunnel を張り、Service 経由で nginx の静的ファイルを返す。
+        インバウンドポートは開けない。cloudflared がアウトバウンドで Tunnel を張り、Service 経由で nginx の静的ファイルを返す構成。
       </figcaption>
     </figure>
   );

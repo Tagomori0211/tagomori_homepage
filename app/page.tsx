@@ -36,7 +36,7 @@ export default function HomePage() {
         <div className="container hero-grid">
           <div className="hero-copy">
             <p className="eyebrow mono">
-              田籠 勇吉 (Tagomori Yuukichi) · インフラエンジニア志望 · 北九州市
+              田籠0211 (Tagomori) · インフラエンジニア志望 · 北九州市
             </p>
             <h1 id="hero-title">
               観測し、
@@ -46,9 +46,10 @@ export default function HomePage() {
               <span className="accent">改善する。</span>
             </h1>
             <p className="tagline">
-              未経験から約 2 週間でプロダクション k3s 環境を構築。自宅ラボで
-              エンタープライズサーバーを運用しながら、IaC・監視・CI/CD を
-              実践的に習得し、GCP Associate Cloud Engineer 認定を取得しました。
+              自宅ラボでFujitsu TX2540M1サーバー、<br/>
+              自作PCを運用しながら、IaC・監視・CI/CD を実践的に習得しました。<br/>
+              Terraform・Ansible・Kubernetes を基軸に、<br/>
+              VictriaMetrics・Grafana 監視基盤を個人運用しています。
             </p>
             <div className="hero-actions">
               <a className="btn primary" href="#about">
@@ -94,19 +95,19 @@ export default function HomePage() {
         <div className="container metrics" role="list" aria-label="主要な数字">
           <div className="metric" role="listitem">
             <span className="metric-value accent">~2w</span>
-            <span className="metric-label">未経験 → プロダクション k3s</span>
+            <span className="metric-label">未経験 → 小規模オンプレ k3sクラスタ構築</span>
           </div>
           <div className="metric" role="listitem">
             <span className="metric-value">GCP ACE</span>
-            <span className="metric-label">Associate Cloud Engineer 認定</span>
+            <span className="metric-label">Associate Cloud Engineer 認定予定</span>
           </div>
           <div className="metric" role="listitem">
             <span className="metric-value accent">−75%</span>
-            <span className="metric-label">インフラコスト削減実績</span>
+            <span className="metric-label">インフラコスト削減実績(Minecraft-on-Kubernetes)</span>
           </div>
           <div className="metric" role="listitem">
-            <span className="metric-value">10G</span>
-            <span className="metric-label">スイッチレス・デイジーチェーン</span>
+            <span className="metric-value">10G Lan環境</span>
+            <span className="metric-label">SPOFを受容した安価なLANカードを用いたスイッチレス・デイジーチェーン</span>
           </div>
         </div>
       </section>
@@ -123,34 +124,36 @@ export default function HomePage() {
           <div className="about-grid">
             <div className="about-main">
               <p>
-                工業高校（電子情報科）を卒業後、ゲームデバッグや物流倉庫など多様な現場を経験してきました。
-                2024 年 11 月にインフラエンジニアリングの独学を開始し、約 2 週間で
-                Terraform・Ansible・k3s を用いたプロダクション環境の構築に到達しています。
+                専門学校（ゲームクリエータ科）を卒業後、<br/>
+                ゲームデバッグや物流倉庫など多様な現場を経験してきました。<br/>
+                2025 年 11 月に独学を開始し、<br/>
+                Terraform・Ansible・k3s を用いた小規模クラスタ環境の構築に到達しています。<br/>
               </p>
               <p>
-                「自宅ラボ＝実務のシミュレーション環境」という方針のもと、
-                エンタープライズサーバー（FUJITSU PRIMERGY TX2540 M1 / Xeon 20C40T / 192GB ECC RAM）上に
-                Proxmox VE を基盤としたクラスター環境を構築・運用。
+                「自宅ラボ＝実務のシミュレーション環境」という方針のもと、<br />
+                FUJITSU PRIMERGY TX2540 M1、Ryzen5700Gマシン上に<br />
+                Proxmox VE を基盤としたクラスター環境を構築・運用。<br />
                 IaC・監視・CI/CD の一連のパイプラインを個人で設計・構築・運用しています。
               </p>
+              
               <p>
                 現場で身につけた「数字を並べ、判断し、改善する」サイクルと独学で得たインフラ技術を武器に、
-                Web / 通信系のインフラエンジニア・SRE ポジションを志望しています。
-                将来的にはゲーム業界の SRE / インフラ部門で、最高のエンタメ体験を支える基盤構築に携わることを目指しています。
+                Web / 通信系のエンジニア・SRE ポジションを志望しています。
               </p>
             </div>
             <aside className="about-card">
               <dl className="profile-dl">
                 <dt className="mono">氏名</dt>
-                <dd>田籠 勇吉（たごもり ゆうきち）</dd>
+                <dd>田籠0211（たごもり）</dd>
                 <dt className="mono">拠点</dt>
                 <dd>福岡県 北九州市</dd>
                 <dt className="mono">志望</dt>
                 <dd>インフラエンジニア / SRE</dd>
-                <dt className="mono">認定</dt>
-                <dd>GCP Associate Cloud Engineer</dd>
                 <dt className="mono">学歴</dt>
-                <dd>工業高校 電子情報科 卒</dd>
+                <dd>工業高校 電子情報科 卒
+                  <dd>KCS北九州情報専門学校</dd>
+                    <dd>ゲームクリエータ科 卒</dd>
+                </dd>                
                 <dt className="mono">職歴</dt>
                 <dd>ゲームデバッグ、物流倉庫</dd>
               </dl>
@@ -166,7 +169,7 @@ export default function HomePage() {
             no="02"
             id="skills-heading"
             title="技術スタック"
-            lead="TAK Pipeline — Terraform (IaC) → Ansible (Config) → Kubernetes (Orchestration) を基軸に、監視・CI/CD を含むモダンな DevOps 環境を個人運用。"
+            lead="TAK Stack — Terraform (IaC) → Ansible (Config) → Kubernetes (Orchestration) を基軸に、監視・CI/CD を含むモダンな DevOps 環境を個人運用。"
           />
           <SkillGrid />
         </div>
@@ -179,7 +182,7 @@ export default function HomePage() {
             no="03"
             id="timeline-heading"
             title="学習の軌跡"
-            lead="2024 年 11 月の学習開始から、約 2 週間でプロダクション環境構築に到達。以降も継続的に技術領域を拡張。"
+            lead="2025 年 11 月の学習開始から、約 2 週間でクラスタ環境構築に到達。以降も継続的に技術領域を拡張。"
           />
           <Timeline />
         </div>
@@ -191,8 +194,8 @@ export default function HomePage() {
           <SectionHead
             no="04"
             id="story-heading"
-            title="旗艦ストーリー"
-            lead="あるワークロード向けに積み上げた構成が、月間の電気代・回線費を含む運用コストをおよそ 4.5 倍に押し上げていた。観測データと制約を並べ直し、「維持するより廃止する」と判断した記録。"
+            title="メインストーリー"
+            lead="Minecraftワークロード向けに積み上げた構成が、月間の電気代・回線費を含む運用コストを予想のおよそ 4.5 倍に押し上げていた。観測データと制約を並べ直し、「維持するより廃止する」と判断した記録。"
           />
           <ol className="steps-grid">
             <li className="step-card">
@@ -200,17 +203,15 @@ export default function HomePage() {
               <h3>数字を並べる</h3>
               <p>
                 月間の電気代・回線費・稼働率・実際に使われた時間を同じ表に置いた。
-                Prometheus のメトリクスと請求書を突き合わせ、感覚ではなく
-                「何に、いくら、どれだけ使ったか」を可視化した。
+                VictoriaMetrics のデータとGCP課金データを突き合わせ、感覚ではなく
+                「何に、いくら、どれだけ使ったか」を把握した。
               </p>
             </li>
             <li className="step-card">
               <span className="step-no mono">02 / 判断</span>
               <h3>維持より廃止</h3>
               <p>
-                単スレッド性能が要る実験負荷のために組んだ構成は、目的を果たした後は過剰だった。
-                稼働率データが裏付けた：月間で実際に使われたのは全体の 12% 未満。
-                サンクコストに引きずられず、薄い構成へ戻す判断を下した。
+                GKEを使用してマネージドサービスの恩恵を受けていたが、Minecraftプロキシには過剰であり、コストが高すぎた。そのためGCEでのDocker-Compose運用に切り替え、GKEを廃止する判断を下した。
               </p>
             </li>
             <li className="step-card">
@@ -235,13 +236,13 @@ export default function HomePage() {
           <SectionHead
             no="05"
             id="chains-heading"
-            title="二層の鎖"
-            lead="訪問者がこのページに届くまでの「公開サイト鎖」と、パケットが実際に流れる「物理鎖」。秘密やトークンは載せず、公開可能な層だけを示します。"
+            title="公開サイトフローと物理ネットワーク"
+            lead="訪問者がこのページに届くまでの「公開サイト」と、パケットが実際に流れる「物理ネットワーク」。"
           />
 
           <div className="chain-block">
             <h3>
-              <span className="chip">a</span> 公開サイト鎖 — 論理・配信パス
+              <span className="chip">a</span> 公開サイト — 論理パス
             </h3>
             <PublicChainDiagram />
           </div>
@@ -335,7 +336,7 @@ export default function HomePage() {
             <SectionHead
               no="08"
               id="reproduce-heading"
-              title="秘密なし再現手順"
+              title="当サイトのデプロイ手順"
               lead="このサイトは静的エクスポート。秘密・証明書・トンネル資格情報はリポに含まれません。"
             />
             <ol className="steps">
@@ -375,9 +376,18 @@ kubectl apply -f k8s/homepage/`}</pre>
             no="09"
             id="contact-heading"
             title="連絡"
-            lead="メールアドレスは公開していません。GitHub の Issue / Discussion か X でどうぞ。"
+            //lead="メールアドレスは公開していません。GitHub の Issue / Discussion か X でどうぞ。"
           />
           <div className="contact-links">
+            <a
+              className="contact-card"
+              //href={GITHUB_URL}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <span className="contact-kind mono">E-Mail</span>
+              <span className="contact-value">tagomoriyuukichi@gmail.com</span>
+            </a>
             <a
               className="contact-card"
               href={GITHUB_URL}

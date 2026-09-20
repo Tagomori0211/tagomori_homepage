@@ -3,14 +3,14 @@ import { GITHUB_URL, GITHUB_USER, X_HANDLE } from "@/data/repos";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "田籠 勇吉 — インフラエンジニアポートフォリオ",
+  title: "田籠  — ポートフォリオ",
   description:
-    "田籠 勇吉 (Tagomori Yuukichi) のポートフォリオ。未経験から約2週間でプロダクション k3s 環境を構築。Terraform/Ansible/Kubernetes による IaC、Prometheus/Grafana 監視基盤、GCP ACE 認定。",
+    "田籠0211 (Tagomori0211) のポートフォリオ。未経験から約2週間で k3s 環境を構築。Terraform/Ansible/Kubernetes による IaC、Prometheus/Grafana 監視基盤",
   robots: { index: true, follow: true },
   openGraph: {
-    title: "田籠 勇吉 — インフラエンジニアポートフォリオ",
+    title: "田籠 — インフラエンジニアポートフォリオ",
     description:
-      "自宅ラボでエンタープライズサーバーを運用するインフラエンジニア志望。IaC・監視・CI/CD の実践記録と公開プロジェクト。",
+      "自宅ラボでサーバーを運用するインフラエンジニア志望。IaC・監視・CI/CD の実践記録と公開プロジェクト。",
     type: "website",
     locale: "ja_JP",
   },

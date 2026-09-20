@@ -1161,17 +1161,17 @@ ol.steps li::marker {
 .timeline {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 3;
   position: relative;
 }
 
 .timeline::before {
   content: "";
   position: absolute;
-  left: 78px;
+  left: 98px;
   top: 12px;
   bottom: 12px;
-  width: 2px;
+  width: 3px;
   background: var(--line-strong);
 }
 
@@ -1189,10 +1189,10 @@ ol.steps li::marker {
 
 .timeline-marker {
   position: absolute;
-  left: 72px;
+  left: 90px;
   top: 8px;
   width: 14px;
-  height: 14px;
+  height: 16px;
   border-radius: 50%;
   background: var(--bg-3);
   border: 2px solid var(--line-strong);
@@ -1209,8 +1209,9 @@ ol.steps li::marker {
   font-size: 0.82rem;
   color: var(--muted);
   text-align: right;
-  padding-top: 0.15rem;
+  padding-top: 0.4rem;
   line-height: 1.4;
+  right: 50px;
 }
 
 .timeline-content {

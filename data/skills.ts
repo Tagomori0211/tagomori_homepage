@@ -18,7 +18,7 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     name: "監視 / 可観測性",
-    skills: ["Prometheus", "Grafana", "Alertmanager", "gRPC-Web"],
+    skills: ["VictoriaMetrics", "Grafana" ],
   },
   {
     name: "CI/CD / デリバリ",
@@ -30,7 +30,7 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     name: "仮想化 / OS",
-    skills: ["Proxmox VE", "Linux (Ubuntu/Debian)", "Windows Server"],
+    skills: ["Proxmox VE", "Linux (Ubuntu/Debian)"],
   },
   {
     name: "クラウド",
@@ -38,7 +38,7 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     name: "言語 / フレームワーク",
-    skills: ["TypeScript", "Python", "Dart", "HCL", "Next.js", "FastAPI", "Ktor"],
+    skills: ["Python", "Dart", "HCL"],
   },
 ];
 
@@ -48,8 +48,8 @@ export type Certification = {
 };
 
 export const certifications: Certification[] = [
-  {
-    name: "Associate Cloud Engineer",
-    issuer: "Google Cloud",
-  },
+//  {
+//    name: "Associate Cloud Engineer ",
+//    issuer: "Google Cloud",
+//  },
 ];

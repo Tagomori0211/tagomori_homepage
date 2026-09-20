@@ -35,7 +35,7 @@ export default function PhysicalChainSummary() {
           単一障害点が増えるのは承知の上で、コスト優先で受容したリスクです。
         </p>
         <p className="note">
-          配線図・コスト試算・ノード選定理由の正本は{" "}
+          配線図・コスト試算・ノード選定理由の詳細は{" "}
           <a href={`${GITHUB_URL}/tagomori-homelab`} rel="noopener noreferrer" target="_blank">
             tagomori-homelab
           </a>{" "}

@@ -11,35 +11,35 @@ export type Milestone = {
 
 export const milestones: Milestone[] = [
   {
-    date: "2024.11",
+    date: "2025.11",
     title: "インフラ学習開始",
     description:
       "完全未経験から Terraform・Ansible・Kubernetes の学習に着手。複数の LLM を並列活用し、検証とバイアス補正を行う「敵対的デバッグ」手法を確立。",
   },
   {
     date: "約 2 週間後",
-    title: "プロダクション k3s 環境をデプロイ",
+    title: " k3s 環境をデプロイ",
     description:
-      "Terraform → Ansible → k3s の一貫パイプライン（TAK Pipeline）を設計・構築。Prometheus / Grafana による監視基盤を含むプロダクション環境を自宅ラボ上に展開。",
+      "Terraform → Ansible → k3s の一貫（TAK Stack）で設計・構築。VictoriaMetrics / Grafana による監視基盤を含む環境を自宅ラボ上に展開。",
     highlight: true,
   },
   {
-    date: "2025",
-    title: "Minecraft サーバーを k8s 移行・チーム運用",
+    date: "2025.12",
+    title: "Minecraft サーバーを k8s 移行・運用",
     description:
-      "コミュニティ向け Minecraft サーバーを k3s 上に移行し、HCL による IaC 管理を確立。4 人チーム体制での協力運用を開始。",
+      "コミュニティ向け Minecraft サーバーを k3s 上に移行し、HCL による IaC 管理を確立。運用を開始。",
   },
   {
-    date: "2026",
-    title: "GCP ACE 取得・監視ダッシュボード基盤を設計",
+    date: "2026.06",
+    title: "監視ダッシュボード基盤を設計",
     description:
-      "Google Cloud Associate Cloud Engineer 認定を取得。gRPC-Web / Ktor を用いた高セキュアな監視ダッシュボード基盤（cloud-observability-gateway）を設計・開発。",
-    highlight: true,
-  },
+      "gRPC-Web / Ktor を用いた高セキュアな監視ダッシュボード基盤（cloud-observability-gateway）を設計・開発。",
+    },
   {
     date: "2026.09",
     title: "ポートフォリオサイト公開",
     description:
       "Next.js 静的エクスポート → nginx → k3s → Cloudflare Tunnel の配信鎖を構築。GitHub Actions と Tailscale 経由のデプロイを自動化し、このサイト自体をインフラ実績として公開。",
-  },
+      //highlight: true
+    },
 ];
