@@ -146,8 +146,11 @@ export default function HomePage() {
                 <dt className="mono">志望</dt>
                 <dd>インフラエンジニア / SRE</dd>
                 <dt className="mono">学歴</dt>
-                <dd>工業高校 電子情報科 卒</dd>
-                <dd>KCS北九州情報専門学校 ゲームクリエータ科 卒</dd>
+                <dd>
+                  工業高校 電子情報科 卒
+                  <br />
+                  KCS北九州情報専門学校 ゲームクリエータ科 卒
+                </dd>
                 <dt className="mono">職歴</dt>
                 <dd>ゲームデバッグ、物流倉庫</dd>
               </dl>
