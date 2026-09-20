@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { GITHUB_URL, GITHUB_USER, X_HANDLE } from "@/data/repos";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "田籠  — ポートフォリオ",
+  title: "田籠0211 — ポートフォリオ",
   description:
-    "田籠0211 (Tagomori0211) のポートフォリオ。未経験から約2週間で k3s 環境を構築。Terraform/Ansible/Kubernetes による IaC、Prometheus/Grafana 監視基盤",
+    "田籠0211（HN／Tagomori0211）のポートフォリオ。未経験から約2週間で k3s 環境を構築。Terraform/Ansible/Kubernetes による IaC、VictoriaMetrics/Grafana 監視基盤",
   robots: { index: true, follow: true },
   openGraph: {
-    title: "田籠 — インフラエンジニアポートフォリオ",
+    title: "田籠0211 — インフラエンジニアポートフォリオ",
     description:
       "自宅ラボでサーバーを運用するインフラエンジニア志望。IaC・監視・CI/CD の実践記録と公開プロジェクト。",
     type: "website",
@@ -46,11 +47,11 @@ export default function RootLayout({
         </a>
         <header className="site-header">
           <div className="container site-header-inner">
-            <a className="brand" href="/">
+            <Link className="brand" href="/">
               <span className="brand-dot" aria-hidden="true" />
-              <span className="brand-name">Tagomori</span>
+              <span className="brand-name">Tagomori0211</span>
               <span className="brand-sub">homelab / ops</span>
-            </a>
+            </Link>
             <nav className="nav" aria-label="主要ナビ">
               {NAV.map((n) => (
                 <a key={n.href} href={n.href}>
@@ -76,7 +77,7 @@ export default function RootLayout({
         <footer className="site-footer">
           <div className="container footer-inner">
             <div>
-              <p className="footer-brand">田籠 / Tagomori</p>
+              <p className="footer-brand">田籠0211（HN）</p>
               <p className="footer-meta">
                 インフラエンジニア志望 · Kitakyushu · 静的サイトを k3s から Cloudflare Tunnel 経由で配信
               </p>
@@ -108,7 +109,7 @@ export default function RootLayout({
             </ul>
           </div>
           <div className="container footer-copy">
-            <span>© {new Date().getFullYear()} Tagomori</span>
+            <span>© {new Date().getFullYear()} 田籠0211</span>
             <span className="mono">next export → nginx:alpine → k3s</span>
           </div>
         </footer>

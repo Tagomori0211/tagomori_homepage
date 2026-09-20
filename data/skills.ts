@@ -38,7 +38,7 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     name: "言語 / フレームワーク",
-    skills: ["Python", "Dart", "HCL"],
+    skills: ["Python", "Dart", "Flutter", "HCL"],
   },
 ];
 

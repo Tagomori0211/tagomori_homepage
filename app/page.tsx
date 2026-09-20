@@ -36,7 +36,7 @@ export default function HomePage() {
         <div className="container hero-grid">
           <div className="hero-copy">
             <p className="eyebrow mono">
-              田籠0211 (Tagomori) · インフラエンジニア志望 · 北九州市
+              田籠0211（HN） · インフラエンジニア志望 · 北九州市
             </p>
             <h1 id="hero-title">
               観測し、
@@ -98,10 +98,6 @@ export default function HomePage() {
             <span className="metric-label">未経験 → 小規模オンプレ k3sクラスタ構築</span>
           </div>
           <div className="metric" role="listitem">
-            <span className="metric-value">GCP ACE</span>
-            <span className="metric-label">Associate Cloud Engineer 認定予定</span>
-          </div>
-          <div className="metric" role="listitem">
             <span className="metric-value accent">−75%</span>
             <span className="metric-label">インフラコスト削減実績(Minecraft-on-Kubernetes)</span>
           </div>
@@ -143,17 +139,15 @@ export default function HomePage() {
             </div>
             <aside className="about-card">
               <dl className="profile-dl">
-                <dt className="mono">氏名</dt>
+                <dt className="mono">氏名（HN）</dt>
                 <dd>田籠0211（たごもり）</dd>
                 <dt className="mono">拠点</dt>
                 <dd>福岡県 北九州市</dd>
                 <dt className="mono">志望</dt>
                 <dd>インフラエンジニア / SRE</dd>
                 <dt className="mono">学歴</dt>
-                <dd>工業高校 電子情報科 卒
-                  <dd>KCS北九州情報専門学校</dd>
-                    <dd>ゲームクリエータ科 卒</dd>
-                </dd>                
+                <dd>工業高校 電子情報科 卒</dd>
+                <dd>KCS北九州情報専門学校 ゲームクリエータ科 卒</dd>
                 <dt className="mono">職歴</dt>
                 <dd>ゲームデバッグ、物流倉庫</dd>
               </dl>

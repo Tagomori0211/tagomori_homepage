@@ -33,7 +33,7 @@ export const milestones: Milestone[] = [
     date: "2026.06",
     title: "監視ダッシュボード基盤を設計",
     description:
-      "gRPC-Web / Ktor を用いた高セキュアな監視ダッシュボード基盤（cloud-observability-gateway）を設計・開発。",
+      "Flutter を用いたクロスプラットフォーム監視ダッシュボード基盤（cloud-observability-gateway）を設計・開発。",
     },
   {
     date: "2026.09",
