@@ -1,6 +1,6 @@
 # Homepage デプロイ設計案: IAP 経由（3番）
 
-値・トークン・kubeconfig 本文・鍵は書かない。名前と置き場所・手順案のみ。  
+値・トークン・kubeconfig 本文・鍵・実 IP アドレスは書かない。名前と置き場所・手順案のみ。  
 実装（`.github` 改修・Secret 投入・apply）は**裁可後**。本ファイルは設計偵察の成果物。
 
 裁可前提:
@@ -43,9 +43,9 @@
 ドキュメント上、`tagomori-app` の Tailscale 目的は主に監視系（`gce-mc-monitoring` / VPC 内 VictoriaMetrics）。  
 **「`tagomori-app` からオンプレ k3s API（例: Tailscale 上の k3s-worker）へ kubectl する」手順・実績は無し。**
 
-オンプレ k3s API の既存ホスト（内向き・新規公開しない）:
-- LAN: `192.168.0.151:6443`
-- Tailscale: `100.107.122.45:6443`（`k3s-worker`）
+オンプレ k3s API の既存ホスト（内向き・新規公開しない。実アドレスはリポに書かない）:
+- LAN: `<k3s-worker の LAN アドレス>:6443`
+- Tailscale: `<k3s-worker の tailnet アドレス>:6443`（MagicDNS 名 `k3s-worker` で参照）
 
 正の運用（Minecraft-on-Kubenates）: **kubectl は `ssh k3s-worker` 上で `sudo kubectl`**。クライアント直実行は禁止。
 
@@ -78,7 +78,7 @@ GitHub-hosted (ubuntu-latest)
 
 1. **`tagomori-app` に `kubectl` 導入**（未記載）
 2. **オンプレ向け kubeconfig を VM 上に配置**（server は既存内向きホストのみ。git に実体を置かない。Secret Manager または手動一度きり）
-3. **到達確認**: `gce-tagomori-app` → `k3s-worker`（`100.107.122.45:6443`）が Tailscale ACL / 経路で許可されているか実測
+3. **到達確認**: `gce-tagomori-app` → `k3s-worker`（tailnet 上の k3s API `:6443`）が Tailscale ACL / 経路で許可されているか実測
 4. （代替案・同じく裁可）IAP → `tagomori-app` → **Tailscale SSH で `k3s-worker` に入り `sudo kubectl`**  
    - MoK 正手順に近いが、`tagomori-app`→`k3s-worker` の SSH 鍵整備が追加で必要（code→k3s は鍵拒否の既知事実あり。別経路）
 

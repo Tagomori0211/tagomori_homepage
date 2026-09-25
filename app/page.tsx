@@ -114,12 +114,12 @@ export default function HomePage() {
               </p>
               <p>
                 「自宅ラボ＝実務のシミュレーション環境」という方針のもと、FUJITSU PRIMERGY TX2540 M1、Ryzen 5700G
-                マシン上に Proxmox VE を基盤としたクラスター環境を構築・運用。IaC・監視・CI/CD
+                マシン上に Proxmox VE を基盤としたクラスタ環境を構築・運用。IaC・監視・CI/CD
                 の一連のパイプラインを個人で設計・構築・運用しています。
               </p>
               <p>
                 現場で身につけた「数字を並べ、判断し、改善する」サイクルと独学で得たインフラ技術を武器に、Web /
-                通信系のエンジニア・SRE ポジションを志望しています。
+                通信系のインフラエンジニア・SRE ポジションを志望しています。
               </p>
             </div>
 
@@ -183,7 +183,7 @@ export default function HomePage() {
           <SheetHead
             sheet={sheet("chains")}
             headingId="chains-heading"
-            title="公開サイトフローと物理ネットワーク"
+            title="公開サイト・デプロイ・物理ネットワーク"
             lead="訪問者がこのページに届くまでの「公開サイト」、変更が本番に届くまでの「デプロイ」、パケットが実際に流れる「物理ネットワーク」。"
           />
           <div className="reveal">

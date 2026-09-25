@@ -43,7 +43,7 @@ GitHub-hosted Actions で apply する場合の想定。**採否は裁可待ち�
 
 ## 3. GitHub-hosted runner → 私設 k3s API 到達（選択肢・事実）
 
-code → `192.168.0.151` の SSH は鍵拒否で不通（既知）。**手動 kubectl from code はブロッカー。**  
+code → k3s ノード（LAN 内アドレス）の SSH は鍵拒否で不通（既知）。**手動 kubectl from code はブロッカー。**  
 GitHub-hosted のみで apply する場合、runner はクラスタ内網にいない。到達手段の選択肢（実装・公開は裁可後）:
 
 1. **Tailscale 付き self-hosted / 一時 runner**（または Actions から Tailscale 接続）で API に届ける  

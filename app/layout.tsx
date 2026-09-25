@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: TITLE,
     description:
-      "自宅ラボでサーバーを運用するインフラエンジニア志望。IaC・監視・CI/CD の実践記録と公開プロジェクト。",
+      "自宅ラボでサーバーを運用するインフラエンジニア / SRE 志望。IaC・監視・CI/CD の実践記録と公開プロジェクト。",
     url: "/",
     siteName: "tagomori.dev",
     type: "website",

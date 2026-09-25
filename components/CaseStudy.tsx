@@ -31,7 +31,7 @@ export default function CaseStudy() {
           <p className="ba-title">GKE</p>
           <p className="ba-sub">マネージド Kubernetes 上の Minecraft プロキシ</p>
           <p className="ba-figure mono">×4.5</p>
-          <p className="ba-note">月間の運用コスト（電気代・回線費を含む）が予想の約 4.5 倍</p>
+          <p className="ba-note">月間の運用コスト（電気代・回線費を含む）が予想のおよそ 4.5 倍</p>
         </div>
 
         <div className="ba-arrow" aria-hidden="true">

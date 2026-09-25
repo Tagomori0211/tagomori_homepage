@@ -31,7 +31,7 @@ export const SHEETS: Sheet[] = [
   { id: "projects", no: "04", label: "プロジェクト", en: "PROJECTS", nav: true },
   { id: "skills", no: "05", label: "技術スタック", en: "TECH STACK", nav: true },
   { id: "timeline", no: "06", label: "学習の軌跡", en: "REVISION HISTORY" },
-  { id: "ops", no: "07", label: "運用の原則", en: "NOTES" },
+  { id: "ops", no: "07", label: "障害・運用の原則", en: "NOTES" },
   { id: "reproduce", no: "08", label: "デプロイ手順", en: "REPRODUCE" },
   { id: "contact", no: "09", label: "連絡", en: "CONTACT", nav: true },
 ];

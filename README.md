@@ -22,7 +22,7 @@
 ## このサイトが示すこと
 
 - **ケーススタディ**: 観測 → 判断 → 改善。コスト約 4.5 倍まで膨らんだ Minecraft ワークロードの構成を GKE から GCE + Docker Compose へ切り替え、月間コストを約 75% 削減。振り返りは blameless。
-- **公開サイトフローと物理ネットワーク**
+- **公開サイト・デプロイ・物理ネットワーク**
   - 公開サイト: 訪問者 → Cloudflare Tunnel → cloudflared → Service → nginx Pod
   - デプロイ: git push → GitHub Actions（build）→ GHCR → Tailscale → k3s（set image → rollout）
   - 物理ネットワーク: 要約のみ。正本は [tagomori-homelab](https://github.com/Tagomori0211/tagomori-homelab) の README（TX2540 M1 → Ryzen 5700G、10GbE デイジーチェーン、ノード選定・コスト試算など）

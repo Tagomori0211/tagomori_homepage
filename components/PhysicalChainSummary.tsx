@@ -45,7 +45,7 @@ export default function PhysicalChainSummary() {
 
       <div className="phys-notes">
         <p>
-          10G はスイッチレスの<strong>デイジーチェーン（ブリッジ）</strong>。PoE
+          10GbE はスイッチレスの<strong>デイジーチェーン（ブリッジ）</strong>。PoE
           スイッチはコスト・設置制約から不採用。単一障害点が増えるのは承知の上で、コスト優先で受容したリスクです。
         </p>
         <p className="phys-ref">

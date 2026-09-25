@@ -25,7 +25,7 @@ export const milestones: Milestone[] = [
   },
   {
     date: "2025.12",
-    title: "Minecraft サーバーを k8s 移行・運用",
+    title: "Minecraft サーバーを k3s へ移行・運用",
     description:
       "コミュニティ向け Minecraft サーバーを k3s 上に移行し、HCL による IaC 管理を確立。運用を開始。",
   },

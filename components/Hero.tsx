@@ -11,8 +11,8 @@ const MOTTO = [
 const TITLE_BLOCK: { k: string; v: string; note?: string }[] = [
   { k: "志望", v: "インフラエンジニア / SRE" },
   { k: "基軸", v: "Terraform → Ansible → k3s", note: "TAK STACK" },
-  { k: "監視", v: "VictoriaMetrics · Grafana" },
-  { k: "基盤", v: "Proxmox VE · 10GbE 自宅ラボ" },
+  { k: "監視", v: "VictoriaMetrics・Grafana" },
+  { k: "基盤", v: "Proxmox VE・10GbE 自宅ラボ" },
   { k: "学習開始", v: "2025.11" },
 ];
 
@@ -36,7 +36,7 @@ const FIGURES = [
     value: "−75%",
     label: (
       <>
-        インフラコスト削減実績<span className="nowrap">（Minecraft-on-Kubernetes）</span>
+        インフラ関連コスト削減実績<span className="nowrap">（Minecraft-on-Kubernetes）</span>
       </>
     ),
     href: "#story",
@@ -108,6 +108,7 @@ export default function Hero() {
                   <dt>{r.k}</dt>
                   <dd>
                     {r.v}
+                    {r.note ? " " : null}
                     {r.note ? <span className="tblock-note mono">{r.note}</span> : null}
                   </dd>
                 </div>
