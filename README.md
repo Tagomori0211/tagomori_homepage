@@ -21,9 +21,10 @@
 
 ## このサイトが示すこと
 
-- **メインストーリー**: 観測 → 判断 → 改善。コスト約 4.5 倍まで膨らんだ Minecraft ワークロードの構成を GKE から GCE + Docker Compose へ切り替え、月間コストを約 75% 削減。振り返りは blameless。
+- **ケーススタディ**: 観測 → 判断 → 改善。コスト約 4.5 倍まで膨らんだ Minecraft ワークロードの構成を GKE から GCE + Docker Compose へ切り替え、月間コストを約 75% 削減。振り返りは blameless。
 - **公開サイトフローと物理ネットワーク**
   - 公開サイト: 訪問者 → Cloudflare Tunnel → cloudflared → Service → nginx Pod
+  - デプロイ: git push → GitHub Actions（build）→ GHCR → Tailscale → k3s（set image → rollout）
   - 物理ネットワーク: 要約のみ。正本は [tagomori-homelab](https://github.com/Tagomori0211/tagomori-homelab) の README（TX2540 M1 → Ryzen 5700G、10GbE デイジーチェーン、ノード選定・コスト試算など）
 - **プロジェクト一覧**: GitHub の公開リポジトリへのリンク（`data/repos.ts` で管理。追加・説明変更はこのファイルだけ直す）
 - 障害・運用の短い原則、秘密を含まない再現手順、連絡導線
@@ -51,15 +52,21 @@ flowchart LR
 
 | § | セクション | 内容 |
 |---|-----------|------|
+ページ冒頭は表題欄つきのヒーローと、根拠のシートへリンクする主要な数字。
+
+| SHEET | セクション | 内容 |
+|---|-----------|------|
 | 01 | 自己紹介 | 経歴・学歴・志望動機 |
-| 02 | 技術スタック | IaC / コンテナ / 監視 / CI/CD / ネットワークのスキル一覧 |
-| 03 | 学習の軌跡 | 独学開始から現在までのマイルストーン |
-| 04 | メインストーリー | 観測 → 判断 → 改善のコスト削減記録 |
-| 05 | 公開サイトフローと物理ネットワーク | 論理パス図と物理構成の要約 |
-| 06 | プロジェクト | GitHub 公開リポジトリ一覧 |
+| 02 | ケーススタディ | GKE 廃止で関連コスト約 75% 削減（Before / After と 観測 → 判断 → 改善） |
+| 03 | 構成図 | 公開サイトの論理パス / CI/CD パイプライン / 物理ネットワーク |
+| 04 | プロジェクト | 注目リポジトリ 3 件 + 部品表（その他の公開リポジトリ） |
+| 05 | 技術スタック | TAK Stack とカテゴリ別スキル |
+| 06 | 学習の軌跡 | 改訂履歴形式のマイルストーン |
 | 07 | 障害・運用の原則 | blameless な運用ポリシー |
 | 08 | 当サイトのデプロイ手順 | 秘密なしで再現できるビルド・配信手順 |
-| 09 | 連絡 | メール / GitHub / X |
+| 09 | 連絡 | メール / GitHub / X / Issues |
+
+アンカー ID（`#about` `#story` `#chains` など）は旧構成から変えていないので、既存の共有リンクはそのまま使えます。
 
 ## 技術方針
 
@@ -69,6 +76,9 @@ flowchart LR
 | 出力 | `output: 'export'`（静的 `out/`） |
 | 画像 | `images.unoptimized: true` |
 | 言語 | TypeScript + シンプルな CSS（外部 CDN に依存しない） |
+| デザイン | 「図面」モチーフ。ライト = 製図用紙 / ダーク = 青焼き（OS 設定に追従 + 手動切替）。印刷すると履歴書風の A4 レイアウトになる |
+| フォント | IBM Plex Sans JP / IBM Plex Mono を npm（@fontsource）から自己ホスト。和文はサイト内の文字だけにサブセット化（`npm run fonts:subset`） |
+| SEO | OGP 画像・favicon・`robots.txt`・`sitemap.xml`・JSON-LD（Person）を静的に出力 |
 | Lint | ESLint 9（flat config, `eslint-config-next`） |
 | パッケージ | npm（lockfile あり） |
 | コンテナ | multi-stage: `next build` → `nginx:alpine` で `out/` 配信 |
@@ -83,6 +93,12 @@ flowchart LR
 npm install
 npm run build   # → out/ に静的ファイルが生成される
 npm run lint    # ESLint
+```
+
+本文（`app/` `components/` `data/`）の文字を増やしたら、フォントのサブセットを作り直してコミットしてください（忘れても、足りない文字は @fontsource の分割フォントが自動で補うので表示は崩れません）。
+
+```bash
+npm run fonts:subset   # → public/fonts/*.woff2 と app/font-subset.css を再生成
 ```
 
 開発サーバ（任意）:

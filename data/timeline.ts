@@ -18,7 +18,7 @@ export const milestones: Milestone[] = [
   },
   {
     date: "約 2 週間後",
-    title: " k3s 環境をデプロイ",
+    title: "k3s 環境をデプロイ",
     description:
       "Terraform → Ansible → k3s の一貫（TAK Stack）で設計・構築。VictoriaMetrics / Grafana による監視基盤を含む環境を自宅ラボ上に展開。",
     highlight: true,
